@@ -9,14 +9,14 @@ import java.util.*;
 public class Users {
 
 
-    private final long id;
-    private final String email;
-    private final String password;
+    private  static long id;
+    private  static   String email;
+    private  static   String password;
 
 //    private final Map<Integer k, Object v > = new MultiValueMap<Integer k, Object v>;
-    private final Map<Long, List<String>> map = new HashMap<Long, List<String>>();
-    private final List<String> values = new ArrayList<String>();
-    private  List<String> tempValues = new ArrayList<String>();
+    private  static   Map<Long, List<String>> map = new HashMap<Long, List<String>>();
+    private  static   List<String> values = new ArrayList<String>();
+    private  static   List<String> tempValues = new ArrayList<String>();
 
 
 
@@ -32,7 +32,7 @@ public class Users {
 
     public Users (long id) {
 
-        tempValues = map.get(id);
+        tempValues = map.get(id-1);
         this.id = id;
         this.email = tempValues.get(0);
         this.password = tempValues.get(1);
