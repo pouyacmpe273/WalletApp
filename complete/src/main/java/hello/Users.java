@@ -15,30 +15,35 @@ public class Users {
 
 //    private final Map<Integer k, Object v > = new MultiValueMap<Integer k, Object v>;
     private  static   Map<Long, List<String>> map = new HashMap<Long, List<String>>();
-    private  static   List<String> values = new ArrayList<String>();
-    private  static   List<String> tempValues = new ArrayList<String>();
+    private    List<String> values = new ArrayList<String>();
+    private   List<String> tempValues = new ArrayList<String>();
 
 
 
 
-    public Users(long id, String email, String password) {
+    public Users(long id, String email, String password, String methodaa) {
         this.id = id;
         this.email = email;
         this.password = password;
         values.add(email);
         values.add(password);
-        map.put(id, values);
+        if ( methodaa == "post" ) {
+            map.put(id, values);
+        }
+        else {
+            map.get(id).clear();
+            map.put(id, values);
+        }
     }
 
     public Users (long id) {
 
-        tempValues = map.get(id-1);
+        tempValues = map.get(id);
         this.id = id;
         this.email = tempValues.get(0);
         this.password = tempValues.get(1);
 
     }
-
 
     public long getId() {
         return id;
