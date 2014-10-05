@@ -27,6 +27,7 @@ repositories {
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile files('C:\\Users\\pjafaria\\.m2\\repository\\myownjars\\commons-collections4-4.0.jar')
     testCompile("junit:junit")
 }
 

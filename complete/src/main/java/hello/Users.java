@@ -9,25 +9,25 @@ import java.util.*;
 public class Users {
 
 
-    private  static long id;
-    private  static   String email;
-    private  static   String password;
+    private static long id;
+    private static   String email;
+    private static   String password;
 
 //    private final Map<Integer k, Object v > = new MultiValueMap<Integer k, Object v>;
-    private  static   Map<Long, List<String>> map = new HashMap<Long, List<String>>();
-    private    List<String> values = new ArrayList<String>();
-    private   List<String> tempValues = new ArrayList<String>();
+    private static   Map<Long, List<String>> map = new HashMap<Long, List<String>>();
+    private List<String> values = new ArrayList<String>();
+    private List<String> tempValues = new ArrayList<String>();
 
 
 
 
-    public Users(long id, String email, String password, String methodaa) {
+    public Users(long id, String email, String password, String restMethod) {
         this.id = id;
         this.email = email;
         this.password = password;
         values.add(email);
         values.add(password);
-        if ( methodaa == "post" ) {
+        if ( restMethod == "post" ) {
             map.put(id, values);
         }
         else {
@@ -56,6 +56,10 @@ public class Users {
     public String getPassword() { return password;}
 
     public String getCreated_at () { return new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());}
+
+    public static int getMapSize() {
+        return map.size();
+    }
 
 
 }
