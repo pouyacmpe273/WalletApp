@@ -6,19 +6,19 @@ import java.sql.Date;
 import java.util.concurrent.atomic.AtomicLong;
 
 
-/**
- * Created by pjafaria on 9/24/2014.
- */
+
 @RequestMapping("/Users")
 @RestController
 
 public class UsersController {
 
-    private final AtomicLong counter = new AtomicLong();
+    private final AtomicLong user_counter = new AtomicLong();
+    private final AtomicLong card_counter = new AtomicLong();
+
     @RequestMapping(method = RequestMethod.POST)
     public Users users(@RequestParam(value="email", required=false, defaultValue="myemail@email.com") String email,
                        @RequestParam(value="password", required=false, defaultValue="secretpass") String password) {
-        return new Users(counter.incrementAndGet(),
+        return new Users(user_counter.incrementAndGet(),
                 email, password, "post");
     }
 
@@ -42,13 +42,20 @@ public class UsersController {
                             @RequestParam (value = "card_number", required = false, defaultValue = "1234") String card_number,
                             @RequestParam (value = "expiration_date", required = false, defaultValue = "2001-11-12") String expiration_date) {
         long idLong = Long.parseLong(id);
-        return new IdCards(idLong, card_name, Long.parseLong(card_number), Date.valueOf(expiration_date) );
+
+        return new IdCards(idLong, card_counter.incrementAndGet(), card_name, Long.parseLong(card_number), Date.valueOf(expiration_date) );
     }
 
-    @RequestMapping (value = "/{id}/idcards", method = RequestMethod.GET)
-    public IdCards getAllIDCards(@PathVariable String id) {
-       return new IdCards(Long.parseLong(id));
+    @RequestMapping (value = "/{user_id}/idcards", method = RequestMethod.GET)
+    public IdCards getAllIDCards(@PathVariable String user_id) {
+       return new IdCards(Long.parseLong(user_id));
     }
+
+    @RequestMapping (value = "/users/{user_id}/idcards/{card_id}", method = RequestMethod.DELETE)
+    public IdCards deleteCard(@PathVariable String user_id, String card_id) {
+        return new IdCards(Long.parseLong(user_id), Long.parseLong(card_id));
+    }
+
 
 
 }
