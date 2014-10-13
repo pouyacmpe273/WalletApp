@@ -7,7 +7,7 @@ import java.util.Map;
  */
 public class WalletApp {
 
-    private static Map<String, User> userMap = new HashMap<String, User>();
+    public static Map<String, User> userMap = new HashMap<String, User>();
 //    private static List<IdCards> idCardsList = new ArrayList<IdCards>();
 
     public void addUser(User user) {
@@ -15,11 +15,13 @@ public class WalletApp {
     }
 
     public User updateWallet(User user) {
-        return userMap.put(user.getUser_id(), user);
+        User updatedUser = userMap.put(user.getUser_id(), user);
+        updatedUser = userMap.get(user.getUser_id());
+        return updatedUser;
 
     }
-    public User getUserById(String id) {
-        return userMap.get(id);
+    public User getUserById(String user_id) {
+        return userMap.get(user_id);
     }
 
 }

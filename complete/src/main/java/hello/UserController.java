@@ -1,12 +1,14 @@
 package hello;
 
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicLong;
 
 
 
-@RequestMapping("API/v1/Users")
+@RequestMapping("api/v1/users")
 @RestController
 public class UserController {
 
@@ -15,7 +17,7 @@ public class UserController {
     private final WalletApp myWallet = new WalletApp();
 
     @RequestMapping(method = RequestMethod.POST)
-    public User createUsers(@RequestBody User user) {
+    public User createUsers(@Valid @RequestBody User user) {
         user.setUser_id("u-" + user_counter.incrementAndGet());
         user.setCreated_at(new Date().toString());
         myWallet.addUser(user);
@@ -28,7 +30,10 @@ public class UserController {
     }
 
     @RequestMapping (value = "/{id}", method = RequestMethod.PUT)
-    public User updateUser(@PathVariable String id, User user) {
+    public User updateUser(@PathVariable String id, @RequestBody User user) {
+        user.setUser_id(id);
+        user.setCreated_at(myWallet.getUserById(id).getCreated_at());
+//        myWallet.userMap.remove(id);
         return myWallet.updateWallet(user);
     }
 

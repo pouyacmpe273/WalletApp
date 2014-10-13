@@ -8,13 +8,13 @@ import java.util.*;
  */
 public class User {
 
-    private static String user_id;
-    private static String email;
-    private static String password;
-    private static String created_at;
-    private static Map<Long, List<String>> map = new HashMap<Long, List<String>>();
-    private List<String> values = new ArrayList<String>();
-    private List<String> tempValues = new ArrayList<String>();
+    private String user_id;
+    private String email;
+    private String password;
+    private String created_at;
+//    private static Map<Long, List<String>> map = new HashMap<Long, List<String>>();
+//    private List<String> values = new ArrayList<String>();
+//    private List<String> tempValues = new ArrayList<String>();
 
     public User(String user_id, String email, String password, String created_at) {
         this.user_id = user_id;
@@ -35,10 +35,6 @@ public class User {
     public String getPassword() { return password;}
 
     public String getCreated_at () { return new SimpleDateFormat("yy-MM-dd - HH:mm").format(Calendar.getInstance().getTime());}
-
-    public static int getMapSize() {
-        return map.size();
-    }
 
     public void  setUser_id (String user_id) {
         this.user_id = user_id;
