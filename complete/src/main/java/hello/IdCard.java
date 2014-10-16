@@ -19,28 +19,31 @@ public class IdCard {
 
     }
     public void setCard_id (String card_id) {
-
+        this.card_id = card_id;
     }
 
     public void setCard_name (String card_name) {
-
+        this.card_name = card_name;
     }
 
     public void setCard_number (String card_number) {
-
+        this.card_number = card_number;
     }
 
     public void setExpiration_date (String expiration_date) {
-
+        this.expiration_date = expiration_date;
     }
 
     public String getCard_id () { return card_id; }
 
-    public String getCard_number () { return card_id; }
+    public String getCard_number () { return card_number; }
 
-    public String getCard_name () { return card_id; }
+    public String getCard_name () { return card_name; }
 
-    public String getExpiration_date () { return card_id; }
+    public String getExpiration_date () { return expiration_date; }
+
+        /*      end of setters and getters     */
+
 
 
 }

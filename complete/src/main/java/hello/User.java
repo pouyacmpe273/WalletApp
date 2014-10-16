@@ -1,7 +1,7 @@
 package hello;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by pjafaria on 9/24/2014. true
@@ -12,6 +12,8 @@ public class User {
     private String email;
     private String password;
     private String created_at;
+
+    private static List<IdCard> idCardsList = new ArrayList<IdCard>();
 //    private static Map<Long, List<String>> map = new HashMap<Long, List<String>>();
 //    private List<String> values = new ArrayList<String>();
 //    private List<String> tempValues = new ArrayList<String>();
@@ -34,7 +36,7 @@ public class User {
 
     public String getPassword() { return password;}
 
-    public String getCreated_at () { return new SimpleDateFormat("yy-MM-dd - HH:mm").format(Calendar.getInstance().getTime());}
+    public String getCreated_at () { return created_at;}
 
     public void  setUser_id (String user_id) {
         this.user_id = user_id;
@@ -51,5 +53,8 @@ public class User {
     public void setCreated_at (String created_at) {
         this.created_at = created_at;
     }
+
+
+    /*      end of setters and getters     */
 
 }

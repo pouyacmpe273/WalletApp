@@ -3,7 +3,8 @@ package hello;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.concurrent.atomic.AtomicLong;
 
 
@@ -22,7 +23,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST)
     public User createUsers(@Valid @RequestBody User user) {
         user.setUser_id("u-" + user_counter.incrementAndGet());
-        user.setCreated_at(new Date().toString());
+        user.setCreated_at(new SimpleDateFormat("yy-MM-dd - HH:mm").format(Calendar.getInstance().getTime()));
         myWallet.addUser(user);
         return user;
     }
@@ -40,18 +41,17 @@ public class UserController {
         return myWallet.updateWallet(user);
     }
 
-    @RequestMapping (value = "/{id}/idcards", method = RequestMethod.POST)
-    public IdCard createIdCard(@RequestBody IdCard idCard, @PathVariable String id) {
+    @RequestMapping (value = "/{user_id}/idcards", method = RequestMethod.POST)
+    public IdCard createIdCard(@RequestBody IdCard idCard, @PathVariable String user_id) {
 
-        idCard.setCard_id(id);
-        idCard.setCard_id("c-" +card_counter.incrementAndGet());
-        return idCard;
+        idCard.setCard_id("c-" + card_counter.incrementAndGet());
+        return myWallet.addCardToUser(user_id, idCard);
     }
 
-//    @RequestMapping (value = "/{user_id}/idcards", method = RequestMethod.GET)
-//    public IdCards getAllIDCards(@PathVariable String user_id) {
-//       return new IdCards(Long.parseLong(user_id));
-//    }
+    @RequestMapping (value = "/{user_id}/idcards", method = RequestMethod.GET)
+    public java.util.Collection<Object> getAllIDCards(@PathVariable String user_id) {
+       return myWallet.getCardList(user_id);
+    }
 //
 //    @RequestMapping (value = "/users/{user_id}/idcards/{card_id}", method = RequestMethod.DELETE)
 //    public IdCards deleteCard(@PathVariable String user_id, String card_id) {
