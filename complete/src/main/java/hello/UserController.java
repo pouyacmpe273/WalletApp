@@ -7,6 +7,9 @@ import java.util.Date;
 import java.util.concurrent.atomic.AtomicLong;
 
 
+/*
+Working: User:create, view, update
+ */
 
 @RequestMapping("api/v1/users")
 @RestController
@@ -38,12 +41,11 @@ public class UserController {
     }
 
     @RequestMapping (value = "/{id}/idcards", method = RequestMethod.POST)
-    public IdCards createIdCard(@PathVariable String id,
-                            @RequestParam (value = "card_name", required = false, defaultValue = "SJSU") String card_name,
-                            @RequestParam (value = "card_number", required = false, defaultValue = "1234") String card_number,
-                            @RequestParam (value = "expiration_date", required = false, defaultValue = "2001-11-12") String expiration_date) {
-        long idLong = Long.parseLong(id);
-        return new IdCards(idLong, card_counter.incrementAndGet(), card_name, Long.parseLong(card_number), expiration_date);
+    public IdCard createIdCard(@RequestBody IdCard idCard, @PathVariable String id) {
+
+        idCard.setCard_id(id);
+        idCard.setCard_id("c-" +card_counter.incrementAndGet());
+        return idCard;
     }
 
 //    @RequestMapping (value = "/{user_id}/idcards", method = RequestMethod.GET)
