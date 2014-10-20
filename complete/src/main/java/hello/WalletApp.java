@@ -2,6 +2,7 @@ package hello;
 
 import org.apache.commons.collections4.map.MultiValueMap;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,8 +37,18 @@ public class WalletApp {
     }
 
     public java.util.Collection<IdCard> getCardList(String user_id) {
-//        List<IdCard> allCards = new ArrayList<IdCard>();
         return  idCardMap.getCollection(user_id);
+    }
+
+    public void deleteIdCard (String user_id, String card_id) {
+        Collection<IdCard> idCardList = idCardMap.getCollection(user_id);
+        IdCard deleteThisIdCard = null;
+        for (IdCard idCard : idCardList) {
+            if (idCard.getCard_id().equalsIgnoreCase(card_id))
+                deleteThisIdCard = idCard;
+
+        }
+        idCardMap.removeMapping(user_id, deleteThisIdCard);
     }
 
 }

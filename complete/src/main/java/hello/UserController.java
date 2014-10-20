@@ -52,12 +52,10 @@ public class UserController {
     public java.util.Collection<IdCard> getAllIDCards(@PathVariable String user_id) {
        return myWallet.getCardList(user_id);
     }
-//
-//    @RequestMapping (value = "/users/{user_id}/idcards/{card_id}", method = RequestMethod.DELETE)
-//    public IdCards deleteCard(@PathVariable String user_id, String card_id) {
-//        return new IdCards(Long.parseLong(user_id), Long.parseLong(card_id));
-//    }
 
-
+    @RequestMapping (value = "/{user_id}/idcards/{card_id}", method = RequestMethod.DELETE)
+    public void deleteIdCard(@PathVariable String user_id, @PathVariable String card_id) {
+        myWallet.deleteIdCard(user_id, card_id);
+    }
 
 }
