@@ -1,6 +1,5 @@
 package hello;
 
-import org.apache.commons.collections4.MultiMap;
 import org.apache.commons.collections4.map.MultiValueMap;
 
 import java.util.HashMap;
@@ -15,7 +14,7 @@ public class WalletApp {
 
 
     public static Map<String, User> userMap = new HashMap<String, User>();
-    public static MultiMap<String, IdCard> idCardMap = new MultiValueMap<String, IdCard>();
+    public static MultiValueMap<String, IdCard> idCardMap = new MultiValueMap<String, IdCard>();
 
     public void addUser(User user) {
         userMap.put(user.getUser_id(), user);
@@ -36,9 +35,9 @@ public class WalletApp {
         return idCard;
     }
 
-    public java.util.Collection<Object> getCardList(String user_id) {
+    public java.util.Collection<IdCard> getCardList(String user_id) {
 //        List<IdCard> allCards = new ArrayList<IdCard>();
-        return idCardMap.values();
+        return  idCardMap.getCollection(user_id);
     }
 
 }

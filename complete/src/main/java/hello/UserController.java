@@ -49,7 +49,7 @@ public class UserController {
     }
 
     @RequestMapping (value = "/{user_id}/idcards", method = RequestMethod.GET)
-    public java.util.Collection<Object> getAllIDCards(@PathVariable String user_id) {
+    public java.util.Collection<IdCard> getAllIDCards(@PathVariable String user_id) {
        return myWallet.getCardList(user_id);
     }
 //
